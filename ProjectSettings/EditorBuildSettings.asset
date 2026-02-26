@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RuntimeDemo.unity
     guid: 60541cc673ef6624fb38dcc586f05109
+  - enabled: 1
+    path: Assets/Scenes/GenesisVR.unity
+    guid: 51434debb1f76424e9c826e1f2eb05a4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 167c7c5bfe1700e4bb8b9218ad7e9a54, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 75dc3cfe143501a4493680ba3db8ed76, type: 2}

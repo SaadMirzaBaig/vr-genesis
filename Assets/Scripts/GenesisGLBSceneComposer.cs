@@ -31,7 +31,6 @@ public class GenesisGLBSceneComposer : MonoBehaviour
 
     private bool _started = false;
 
-    // Call this ONLY after login success
     public void StartComposeAfterLogin()
     {
         if (_started) return;
@@ -47,7 +46,6 @@ public class GenesisGLBSceneComposer : MonoBehaviour
             return;
         }
 
-        // Token from PlatformAuth
         var token = PlatformAuth.AccessToken;
         if (string.IsNullOrEmpty(token))
         {
@@ -55,7 +53,6 @@ public class GenesisGLBSceneComposer : MonoBehaviour
             return;
         }
 
-        // Wrap array for JsonUtility
         string wrapped = "{\"items\":" + sceneJson + "}";
         var data = JsonUtility.FromJson<SceneListWrapper>(wrapped);
 

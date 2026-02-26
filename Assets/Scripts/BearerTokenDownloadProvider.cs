@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using GLTFast.Loading;
+using GLTFast;
 
 public class BearerTokenDownloadProvider : IDownloadProvider
 {
@@ -20,6 +21,10 @@ public class BearerTokenDownloadProvider : IDownloadProvider
 
         if (!string.IsNullOrEmpty(_token))
             req.SetRequestHeader("Authorization", $"Bearer {_token}");
+
+        req.certificateHandler = new BypassCertificateHandler();
+        req.disposeCertificateHandlerOnDispose = true;
+
 
         req.downloadHandler = new DownloadHandlerBuffer();
 
@@ -44,6 +49,10 @@ public class BearerTokenDownloadProvider : IDownloadProvider
 
         if (!string.IsNullOrEmpty(_token))
             req.SetRequestHeader("Authorization", $"Bearer {_token}");
+
+        req.certificateHandler = new BypassCertificateHandler();
+        req.disposeCertificateHandlerOnDispose = true;
+
 
         var op = req.SendWebRequest();
         while (!op.isDone)
@@ -74,7 +83,7 @@ public class BearerTokenDownloadProvider : IDownloadProvider
             Success = string.IsNullOrEmpty(error);
             IsBinary = isBinary;
 
-            // Text should be available for non-binary downloads (gltf json)
+            //for non-binary downloads (gltf json)
             Text = (IsBinary == false && data != null)
                 ? System.Text.Encoding.UTF8.GetString(data)
                 : null;
@@ -87,9 +96,9 @@ public class BearerTokenDownloadProvider : IDownloadProvider
     {
         public bool Success { get; }
         public string Error { get; }
-        public byte[] Data { get; }      // usually null for textures
-        public string Text { get; }      // usually null
-        public bool? IsBinary { get; }   // textures are binary => true
+        public byte[] Data { get; }      
+        public string Text { get; }      
+        public bool? IsBinary { get; }   
         public Texture2D Texture { get; }
 
         public SimpleTextureDownload(Texture2D texture, string error)
@@ -105,4 +114,10 @@ public class BearerTokenDownloadProvider : IDownloadProvider
 
         public void Dispose() { }
     }
+
+    private class BypassCertificateHandler : CertificateHandler
+    {
+    protected override bool ValidateCertificate(byte[] certificateData) => true;
+    }
+
 }

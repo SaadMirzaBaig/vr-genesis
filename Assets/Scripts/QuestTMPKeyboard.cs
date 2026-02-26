@@ -15,7 +15,7 @@ public class QuestTMPKeyboard : MonoBehaviour, ISelectHandler, IDeselectHandler
     public void OnSelect(BaseEventData eventData)
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
-        // Force open Android/Quest keyboard
+        // Force open quest keyboard
         var type = input.contentType == TMP_InputField.ContentType.Password
             ? TouchScreenKeyboardType.Default
             : TouchScreenKeyboardType.EmailAddress;
@@ -23,7 +23,7 @@ public class QuestTMPKeyboard : MonoBehaviour, ISelectHandler, IDeselectHandler
         kb = TouchScreenKeyboard.Open(input.text, type, false, false,
             input.contentType == TMP_InputField.ContentType.Password, false, "");
 #endif
-        // Make sure caret is active
+    
         input.ActivateInputField();
     }
 
@@ -39,14 +39,12 @@ public class QuestTMPKeyboard : MonoBehaviour, ISelectHandler, IDeselectHandler
 #if UNITY_ANDROID && !UNITY_EDITOR
         if (kb == null) return;
 
-        // Keep syncing typed text into TMP field
         if (input.text != kb.text)
         {
             input.text = kb.text;
             input.caretPosition = input.text.Length;
         }
 
-        // If done/canceled, release
         if (kb.status == TouchScreenKeyboard.Status.Done ||
             kb.status == TouchScreenKeyboard.Status.Canceled ||
             kb.status == TouchScreenKeyboard.Status.LostFocus)

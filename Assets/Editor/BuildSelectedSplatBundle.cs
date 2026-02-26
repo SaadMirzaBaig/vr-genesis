@@ -4,8 +4,19 @@ using System.IO;
 
 public class BuildSelectedSplatBundle
 {
-    [MenuItem("Tools/Splats/Build Bundle From Selected Splat Asset")]
-    public static void BuildBundleFromSelected()
+    [MenuItem("Tools/Splats/Build Bundle (Windows) From Selected Splat Asset")]
+    public static void BuildWindows()
+    {
+        BuildForTarget(BuildTarget.StandaloneWindows64, "Windows", "_splat_windows");
+    }
+
+    [MenuItem("Tools/Splats/Build Bundle (Android/Quest) From Selected Splat Asset")]
+    public static void BuildAndroid()
+    {
+        BuildForTarget(BuildTarget.Android, "Android", "_splat_android");
+    }
+
+    private static void BuildForTarget(BuildTarget target, string folderName, string suffix)
     {
         var selected = Selection.activeObject;
         if (selected == null)
@@ -21,10 +32,10 @@ public class BuildSelectedSplatBundle
             return;
         }
 
-        string baseName   = Path.GetFileNameWithoutExtension(assetPath);
-        string bundleName = baseName.ToLower() + "_splat";
+        string baseName = Path.GetFileNameWithoutExtension(assetPath).ToLower();
+        string bundleName = baseName + suffix;
 
-        string outputPath = "Assets/AssetBundles";
+        string outputPath = $"Assets/AssetBundles/{folderName}";
         if (!Directory.Exists(outputPath))
         {
             Directory.CreateDirectory(outputPath);
@@ -33,16 +44,16 @@ public class BuildSelectedSplatBundle
         AssetBundleBuild build = new AssetBundleBuild
         {
             assetBundleName = bundleName,
-            assetNames      = new[] { assetPath }
+            assetNames = new[] { assetPath }
         };
 
         BuildPipeline.BuildAssetBundles(
             outputPath,
             new[] { build },
             BuildAssetBundleOptions.None,
-            BuildTarget.StandaloneWindows64
+            target
         );
 
-        Debug.Log($"[SPLAT BUNDLE] Built bundle '{bundleName}' with asset '{assetPath}'");
+        Debug.Log($"[SPLAT BUNDLE] Built {folderName} bundle '{bundleName}' with asset '{assetPath}' into '{outputPath}'");
     }
 }

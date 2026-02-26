@@ -87,7 +87,7 @@ public class PlatformAuth : MonoBehaviour
         }
     }
 
-    // Button onClick
+    //Button onClick
     public void OnLoginButtonClicked()
     {
         string email = (emailInput != null && !string.IsNullOrEmpty(emailInput.text)) ? emailInput.text : defaultEmail;
@@ -234,7 +234,6 @@ public class PlatformAuth : MonoBehaviour
     }
     }
 
-    // DEV ONLY – bypass SSL
     private class BypassCertificateHandler : CertificateHandler
     {
         protected override bool ValidateCertificate(byte[] certificateData) => true;

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class LoginSubmit : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField emailInput;
+   [SerializeField] private TMP_InputField emailInput;
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private Button loginButton;
 
@@ -21,10 +22,16 @@ public class LoginSubmit : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        var keyboard = Keyboard.current;
+
+        if (keyboard != null &&
+            (keyboard.enterKey.wasPressedThisFrame || 
+             keyboard.numpadEnterKey.wasPressedThisFrame))
         {
-            if (passwordInput != null && passwordInput.isFocused) ClickLogin();
-            else if (emailInput != null && emailInput.isFocused) Focus(passwordInput);
+            if (passwordInput != null && passwordInput.isFocused)
+                ClickLogin();
+            else if (emailInput != null && emailInput.isFocused)
+                Focus(passwordInput);
         }
     }
 
