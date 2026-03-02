@@ -1,10 +1,20 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "org.nesnausk"
+      ]
+    }
+  ],
   "dependencies": {
     "com.meta.xr.sdk.core": "83.0.3",
     "com.meta.xr.sdk.interaction.ovr": "83.0.3",
     "com.unity.2d.sprite": "1.0.0",
+    "com.unity.cloud.draco": "5.4.2",
     "com.unity.cloud.gltfast": "6.15.1",
-    "com.unity.collab-proxy": "2.11.2",
+    "com.unity.collab-proxy": "2.11.3",
     "com.unity.feature.development": "1.0.2",
     "com.unity.mobile.android-logcat": "1.4.7",
     "com.unity.multiplayer.center": "1.0.1",
@@ -14,11 +24,12 @@
     "com.unity.timeline": "1.8.10",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.9",
-    "com.unity.xr.hands": "1.7.2",
+    "com.unity.xr.hands": "1.7.3",
     "com.unity.xr.interaction.toolkit": "3.3.1",
     "com.unity.xr.management": "4.5.4",
     "com.unity.xr.openxr": "1.16.1",
-    "org.nesnausk.gaussian-splatting": "file:C:/Users/NabeelaMasroor/Downloads/UnityGaussianSplatting-main/UnityGaussianSplatting-main/package",
+    "org.khronos.unitygltf": "https://github.com/KhronosGroup/UnityGLTF.git",
+    "org.nesnausk.gaussian-splatting": "1.1.1",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.adaptiveperformance": "1.0.0",
     "com.unity.modules.ai": "1.0.0",

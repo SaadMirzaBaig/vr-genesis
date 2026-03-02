@@ -3791,8 +3791,8 @@ MonoBehaviour:
   emailInput: {fileID: 326771254}
   passwordInput: {fileID: 1073406562}
   statusText: {fileID: 731282440}
-  defaultEmail: 
-  defaultPassword: 
+  defaultEmail: n.masroor@myw.ai
+  defaultPassword: nabs8
   runtimeSplatLoader: {fileID: 1449312545}
 --- !u!4 &1175413473
 Transform:
